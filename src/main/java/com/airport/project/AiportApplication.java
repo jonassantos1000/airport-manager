@@ -1,4 +1,4 @@
-package com.aiport.project;
+package com.airport.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
