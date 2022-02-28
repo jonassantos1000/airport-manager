@@ -3,21 +3,21 @@
 
 # Sobre o Projeto
 
-Sistema que realiza vendas de passagem aerea, desenvolvido com a tecnologia SpringBoot e integrado com o banco de dados MYSQL.
+Sistema que realiza vendas de passagem aérea, desenvolvido com a tecnologia SpringBoot e integrado com o banco de dados MYSQL.
 
 # Pré-requisitos
 
-- Banco de dados Mysql, disponivel no link: https://dev.mysql.com/downloads/file/?id=510039
-- Java SE Development Kit 17.0.2, disponivel no link: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-- Configurar variaveis de ambiente do Java.
+- Banco de dados Mysql, disponível no link: https://dev.mysql.com/downloads/file/?id=510039
+- Java SE Development Kit 17.0.2, disponível no link: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+- Configurar variáveis de ambiente do Java.
 
 # Como rodar API 
 
-1º Execute o script airport.sql via workbeanch, esse script é responsável por criar as tabelas necessarias para o funcionamento do sistema.
+1º Execute o script airport.sql via workbeanch, esse script é responsável por criar as tabelas necessárias para o funcionamento do sistema.
 
 2º Clone o projeto, digitando o seguinte comando no terminal: git clone https://github.com/jonassantos1000/airport-manager.git
 
-3º Entre no diretorio do projeto pelo terminal e rode o comando: mvnw clean package
+3º Entre no diretório do projeto pelo terminal e rode o comando: mvnw clean package
 
 4º Copie o arquivo datasource.ini para a pasta target
 
@@ -27,9 +27,9 @@ Sistema que realiza vendas de passagem aerea, desenvolvido com a tecnologia Spri
 
 # Endpoints da API 
 
-É possivel testar os retornos da API através dos endpoints a seguir: 
+É possível testar os retornos da API através dos endpoints a seguir: 
 
-Endpoints diponiveis para serem testados:
+Endpoints diponíveis para serem testados:
 - client
 - flight
 - ticket
@@ -93,7 +93,7 @@ Get:
     
 ## Ticket
 
-Para incluir a compra da passagem aerea, utilizar a requisição abaixo:
+Para incluir a compra da passagem aérea, utilizar a requisição abaixo:
 
   Post:
 	
@@ -112,7 +112,7 @@ Para incluir a compra da passagem aerea, utilizar a requisição abaixo:
         "data_compra": "2022-02-26 21:00:00"
     }
     
-  Para pesquisar a lista de passagens aereas, utilizar a requisição abaixo:  
+  Para pesquisar a lista de passagens aéreas, utilizar a requisição abaixo:  
     
   Get:
    ```
