@@ -13,10 +13,15 @@ Sistema que realiza vendas de passagem aerea, desenvolvido com a tecnologia Spri
 # Como rodar API 
 
 1º Execute o script airport.sql via workbeanch, esse script é responsável por criar as tabelas necessarias para o funcionamento do sistema.
+
 2º Clone o projeto, digitando o seguinte comando no terminal: git clone https://github.com/jonassantos1000/airport-manager.git
+
 3º Entre no diretorio do projeto pelo terminal e rode o comando: mvnw clean package
+
 4º Copie o arquivo datasource.ini para a pasta target
+
 5º Abra o arquivo datasource.ini, na segunda linha informe o usuario do banco, e na terceira linha informe a senha do banco. Salve o arquivo.
+
 6º Pelo terminal, execute o seguinte comando: java -jar target/aiport.jar
 
 # Endpoints da API 
