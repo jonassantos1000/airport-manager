@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,7 +30,7 @@ public class Flight implements Serializable{
 	private Instant horario_chegada;
 	private String Origem;
 	private String Destino;
-	private Integer qtde_assento;
+	private Integer qtde_assento_total=0;
 	private Double preço_passagem;
 	
 	@OneToMany(mappedBy = "flight")
@@ -41,16 +41,17 @@ public class Flight implements Serializable{
 	}
 	
 	public Flight(Long id, Instant horario_saida, Instant horario_chegada, String origem, String destino,
-			Integer qtde_assento, Double preço_passagem) {
+		Integer qtde_assento_total, Double preço_passagem) {
 		super();
 		this.id = id;
 		this.horario_saida = horario_saida;
 		this.horario_chegada = horario_chegada;
 		Origem = origem;
 		Destino = destino;
-		this.qtde_assento = qtde_assento;
+		this.qtde_assento_total = qtde_assento_total;
 		this.preço_passagem = preço_passagem;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -81,21 +82,42 @@ public class Flight implements Serializable{
 	public void setDestino(String destino) {
 		Destino = destino;
 	}
-	public Integer getQtde_assento() {
-		return qtde_assento;
+	
+	public Integer getQtde_assento_total() {
+		return qtde_assento_total;
 	}
-	public void setQtde_assento(Integer qtde_assento) {
-		this.qtde_assento = qtde_assento;
+
+	public void setQtde_assento_total(Integer qtde_assento_total) {
+		this.qtde_assento_total = qtde_assento_total;
 	}
+
 	public Double getPreço_passagem() {
 		return preço_passagem;
 	}
 	public void setPreço_passagem(Double preço_passagem) {
 		this.preço_passagem = preço_passagem;
 	}
-	
+		
+	public Integer getQtde_assento_disponivel() {
+		return qtde_assento_total - getTickets().size();
+	}
+
 	public List<Ticket> getTickets() {
 		return tickets;
+	}
+	
+	public String getAssentosDisponiveis() {
+		List <String> Listassentos= new ArrayList<>();
+		String assentos="";
+		for (int i=1; i <= getQtde_assento_total(); i++) {
+			Listassentos.add(String.valueOf(i));
+			for (Ticket t : getTickets()) {
+				if (t.getAssento().equals(i)) {
+					Listassentos.remove(String.valueOf(t.getAssento()));
+				}
+			}
+		}
+		return assentos.join(",", Listassentos);
 	}
 
 	@Override
@@ -122,7 +144,5 @@ public class Flight implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+		
 }

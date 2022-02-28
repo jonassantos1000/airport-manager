@@ -12,33 +12,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.airport.project.DTO.ClientDTO;
-import com.airport.project.entities.Client;
-import com.airport.project.service.ClientService;
+import com.airport.project.DTO.TicketDTO;
+import com.airport.project.entities.Ticket;
+import com.airport.project.service.TicketService;
 
 @RestController
-@RequestMapping(value = "/clients")
-public class ClientResource {
-
+@RequestMapping(value = "/ticket")
+public class TicketResource {
+	
 	@Autowired
-	ClientService service;	
+	TicketService service;	
 	
 	@GetMapping
-	public ResponseEntity<List<ClientDTO>> findAll(){
-		List<Client> obj = service.findAll();
-		List<ClientDTO> dto = new ArrayList<>();
-		for(Client x : obj) {
-			ClientDTO dto2 = new ClientDTO(); dto2=dto2.transformaEmDTO(x);
+	public ResponseEntity<List<TicketDTO>> findAll(){
+		List<Ticket> obj = service.findAll();
+		List<TicketDTO> dto = new ArrayList<>();
+		for(Ticket x : obj) {
+			TicketDTO dto2 = new TicketDTO(); dto2=dto2.transformaEmDTO(x);
 			dto.add(dto2);
 		}
 		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping
-	public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO obj){
-		Client objc = obj.transformaEmObjeto(obj);
+	public ResponseEntity<TicketDTO> insert(@RequestBody TicketDTO obj){
+		TicketDTO copy = obj;
+		Ticket objc = obj.transformaEmObjeto(obj);
 		service.insert(objc);
-		return new ResponseEntity<ClientDTO>(obj, HttpStatus.CREATED);
+		return new ResponseEntity<TicketDTO>(copy, HttpStatus.CREATED);
 	}
 	
 }

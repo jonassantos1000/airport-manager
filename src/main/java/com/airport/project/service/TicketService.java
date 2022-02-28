@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.airport.project.entities.Flight;
-import com.airport.project.repositories.FlightRepository;
+import com.airport.project.entities.Ticket;
+import com.airport.project.repositories.TicketRepository;
 
 @Service
-public class FlightService {
+public class TicketService {
 	
 	@Autowired
-	FlightRepository flightRepository;
+	TicketRepository flightRepository;
 	
-	public List<Flight> findAll(){
+	public List<Ticket> findAll(){
 		return flightRepository.findAll();
 	}
 	
-	public Flight insert(Flight obj) {
+	public Ticket insert(Ticket obj) {
 		return flightRepository.save(obj);
 	}
 }

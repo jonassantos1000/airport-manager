@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ticket implements Serializable{
@@ -52,6 +53,8 @@ public class Ticket implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@JsonIgnore
 	public Flight getFlight() {
 		return flight;
 	}
@@ -64,6 +67,7 @@ public class Ticket implements Serializable{
 	public void setAssento(Integer assento) {
 		this.assento = assento;
 	}
+
 	public Client getClient() {
 		return client;
 	}
