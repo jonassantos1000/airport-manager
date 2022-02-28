@@ -36,10 +36,11 @@ public class TicketResource {
 	
 	@PostMapping
 	public ResponseEntity<TicketDTO> insert(@RequestBody TicketDTO obj){
-		TicketDTO copy = obj;
 		Ticket objc = obj.transformaEmObjeto(obj);
-		service.insert(objc);
-		return new ResponseEntity<TicketDTO>(copy, HttpStatus.CREATED);
+		objc=service.insert(objc);
+		TicketDTO dto = new TicketDTO();
+		dto=dto.transformaEmDTO(objc);
+		return new ResponseEntity<TicketDTO>(dto, HttpStatus.CREATED);
 	}
 	
 }

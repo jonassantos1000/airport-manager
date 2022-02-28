@@ -1,6 +1,7 @@
 package com.airport.project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,24 +12,50 @@ import com.airport.project.repositories.TicketRepository;
 
 @Service
 public class TicketService {
-	
+
 	@Autowired
 	TicketRepository ticketRepository;
-	
+
 	@Autowired
 	TicketCustomRepository customRepository;
-	
-	public List<Ticket> findAll(){
+
+	public List<Ticket> findAll() {
 		return ticketRepository.findAll();
 	}
-	
+
+	public Ticket findById(Long id) {
+		Optional<Ticket> obj = ticketRepository.findById(id);
+		return obj.get();
+	}
+
 	public Ticket insert(Ticket obj) {
 		obj.setFlight(customRepository.findSeatAvailable(obj.getFlight().getId()));
-		if(obj.getAssento() > obj.getFlight().getQtde_assento_disponivel()) {
-			throw new com.airport.project.service.exceptions.IllegalArgumentException("Seat unavailable "+ obj.getAssento());
-		}else {
-			return ticketRepository.save(obj);
+		obj.setClient(customRepository.validClient(obj.getClient().getId()));
+		if (obj.getClient() == null) {
+			throw new com.airport.project.service.exceptions.ResourceNotFoundException("Client invalid");
+		} else if (obj.getFlight() == null) {
+			throw new com.airport.project.service.exceptions.ResourceNotFoundException("Flight invalid");
+		} else if (validSeat(obj) == false) {
+			throw new com.airport.project.service.exceptions.IllegalArgumentException(
+					"Seat unavailable " + obj.getAssento());
+		} else {
+			ticketRepository.save(obj);
+			return obj = findById(obj.getId());
 		}
-		
 	}
+
+	public boolean validSeat(Ticket obj) {
+		if (obj.getFlight().getQtde_assento_disponivel() < 1) {
+			return false;
+		}
+
+		for (String x : obj.getFlight().getListAssentosDisponiveis()) {
+			if (obj.getAssento() == Integer.valueOf(x)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 }

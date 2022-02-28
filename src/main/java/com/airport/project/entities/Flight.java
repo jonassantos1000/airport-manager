@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Flight implements Serializable{
@@ -83,10 +84,12 @@ public class Flight implements Serializable{
 		Destino = destino;
 	}
 	
+	@JsonIgnore
 	public Integer getQtde_assento_total() {
 		return qtde_assento_total;
 	}
 
+	@JsonIgnore
 	public void setQtde_assento_total(Integer qtde_assento_total) {
 		this.qtde_assento_total = qtde_assento_total;
 	}
@@ -98,14 +101,17 @@ public class Flight implements Serializable{
 		this.preço_passagem = preço_passagem;
 	}
 		
+	@JsonIgnore
 	public Integer getQtde_assento_disponivel() {
 		return qtde_assento_total - getTickets().size();
 	}
 
+	@JsonIgnore
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
 	
+	@JsonIgnore
 	public String getAssentosDisponiveis() {
 		List <String> Listassentos= new ArrayList<>();
 		String assentos="";
@@ -118,6 +124,21 @@ public class Flight implements Serializable{
 			}
 		}
 		return assentos.join(",", Listassentos);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public List<String> getListAssentosDisponiveis() {
+		List <String> Listassentos= new ArrayList<>();
+		for (int i=1; i <= getQtde_assento_total(); i++) {
+			Listassentos.add(String.valueOf(i));
+			for (Ticket t : getTickets()) {
+				if (t.getAssento().equals(i)) {
+					Listassentos.remove(String.valueOf(t.getAssento()));
+				}
+			}
+		}
+		return Listassentos;
 	}
 
 	@Override

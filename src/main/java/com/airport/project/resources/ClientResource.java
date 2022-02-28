@@ -35,10 +35,10 @@ public class ClientResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO obj){
+	public ResponseEntity<Client> insert(@RequestBody ClientDTO obj){
 		Client objc = obj.transformaEmObjeto(obj);
 		service.insert(objc);
-		return new ResponseEntity<ClientDTO>(obj, HttpStatus.CREATED);
+		return new ResponseEntity<Client>(objc, HttpStatus.CREATED);
 	}
 	
 }
