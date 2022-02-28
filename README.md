@@ -38,6 +38,8 @@ Exemplos de utilização de cada endpoint:
 
 ## Client
 
+Para incluir um novo cliente, utilizar a requisição abaixo:
+
   Post:
 	
     Url Requisição: localhost:8080/clients
@@ -48,6 +50,8 @@ Exemplos de utilização de cada endpoint:
     "name": "Client default"
     }
     
+  Para pesquisar a lista de clientes, utilizar a requisição abaixo:
+  
   Get:
    ```
      Find All:
@@ -57,6 +61,8 @@ Exemplos de utilização de cada endpoint:
    ```
    
 ## Flight
+
+Para incluir um novo voo, utilizar a requisição abaixo:
 
   Post:
 	
@@ -72,7 +78,9 @@ Exemplos de utilização de cada endpoint:
         "origem": "salvador",
         "destino": "guarulhos"
     }
-    
+
+Para pesquisar a lista de voos, utilizar a requisição abaixo:
+
 Get:
     
    ```
@@ -84,6 +92,8 @@ Get:
    ```
     
 ## Ticket
+
+Para incluir a compra da passagem aerea, utilizar a requisição abaixo:
 
   Post:
 	
@@ -101,6 +111,8 @@ Get:
         },
         "data_compra": "2022-02-26 21:00:00"
     }
+    
+  Para pesquisar a lista de passagens aereas, utilizar a requisição abaixo:  
     
   Get:
    ```
