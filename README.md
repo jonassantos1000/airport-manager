@@ -73,13 +73,14 @@ Exemplos de utilização de cada endpoint:
         "destino": "guarulhos"
     }
     
-    Get:
+Get:
     
    ```
-     Find All:
+     
+   Find All:
 
-      Url Requisição: localhost:8080/flight
-		
+   Url Requisição: localhost:8080/flight
+       
    ```
     
 ## Ticket
