@@ -7,5 +7,5 @@ import com.airport.project.entities.Ticket;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long>{
-
+	
 }

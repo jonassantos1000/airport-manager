@@ -6,19 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.airport.project.entities.Ticket;
+import com.airport.project.repositories.TicketCustomRepository;
 import com.airport.project.repositories.TicketRepository;
 
 @Service
 public class TicketService {
 	
 	@Autowired
-	TicketRepository flightRepository;
+	TicketRepository ticketRepository;
+	
+	@Autowired
+	TicketCustomRepository customRepository;
 	
 	public List<Ticket> findAll(){
-		return flightRepository.findAll();
+		return ticketRepository.findAll();
 	}
 	
 	public Ticket insert(Ticket obj) {
-		return flightRepository.save(obj);
+		obj.setFlight(customRepository.findSeatAvailable(obj.getFlight().getId()));
+		if(obj.getAssento() > obj.getFlight().getQtde_assento_disponivel()) {
+			throw new com.airport.project.service.exceptions.IllegalArgumentException("Seat unavailable "+ obj.getAssento());
+		}else {
+			return ticketRepository.save(obj);
+		}
+		
 	}
 }
