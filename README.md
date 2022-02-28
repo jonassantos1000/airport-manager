@@ -9,6 +9,7 @@ Sistema que realiza vendas de passagem aerea, desenvolvido com a tecnologia Spri
 
 - Banco de dados Mysql, disponivel no link: https://dev.mysql.com/downloads/file/?id=510039
 - Java SE Development Kit 17.0.2, disponivel no link: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+- Configurar variaveis de ambiente do Java.
 
 # Como rodar API 
 
