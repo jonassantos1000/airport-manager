@@ -46,7 +46,8 @@ public class TicketService {
 
 	public boolean validSeat(Ticket obj) {
 		if (obj.getFlight().getQtde_assento_disponivel() < 1) {
-			return false;
+			throw new com.airport.project.service.exceptions.IllegalArgumentException(
+					"All seats are sold out");
 		}
 
 		for (String x : obj.getFlight().getListAssentosDisponiveis()) {
